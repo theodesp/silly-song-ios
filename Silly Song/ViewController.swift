@@ -9,12 +9,31 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    //MARK: - Outlets
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var lyricsView: UITextView!
+    
+    @IBAction func reset(_ sender: UITextField) {
+        nameField.text = ""
+        lyricsView.text = ""
+    }
+    @IBAction func displayLyrics(_ sender: UITextField) {
+        lyricsView.text = (sender.text ?? "") + " Song"
     }
 
+}
 
+
+// MARK: - UITextFieldDelegate
+extension ViewController: UITextFieldDelegate {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        nameField.delegate = self
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
 }
 
